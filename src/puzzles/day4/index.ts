@@ -1,5 +1,5 @@
 import { getInput } from '../../get-input';
-import { identity, pipe, sum } from 'ramda';
+import { identity, map, pipe, sum } from 'ramda';
 
 export const fourthDay = async (puzzleIndex: string) => {
   const rawInputData = await getInput(4);
@@ -37,9 +37,9 @@ const isOverlapping = (minMaxTuple: { min: number; max: number }[]): boolean =>
 const toNumber = (isCompletelyOverlapping: boolean): number => Number(isCompletelyOverlapping);
 
 const first = (input: string[]) => {
-  console.log(sum(input.map(pipe(splitPairs, toMinMaxTuple, isCompletelyOverlapping, toNumber))));
+  pipe(map(pipe(splitPairs, toMinMaxTuple, isCompletelyOverlapping, toNumber)), sum, console.log)(input)
 };
 
 const second = (input: string[]) => {
-  console.log(sum(input.map(pipe(splitPairs, toMinMaxTuple, isOverlapping, toNumber))));
+  pipe(map(pipe(splitPairs, toMinMaxTuple, isOverlapping, toNumber)), sum, console.log)(input)
 };
