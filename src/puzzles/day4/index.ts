@@ -19,8 +19,8 @@ export const fourthDay = async (puzzleIndex: string) => {
 
 const splitPairs = (pairString: string): string[] => pairString.split(',');
 
-const toMinMaxTuple = (pairs: string[]): { min: number; max: number }[] =>
-  pairs.map((entry) => {
+const toMinMaxTuple = (pairsTuple: string[]): { min: number; max: number }[] =>
+  pairsTuple.map((entry) => {
     const [min, max] = entry.split('-').map(Number);
     return { min, max };
   });
