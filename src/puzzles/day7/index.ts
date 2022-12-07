@@ -1,6 +1,6 @@
 import { getInput } from '../../get-input';
 import { FileSystem } from './file-system';
-import { head, identity, sum } from 'ramda';
+import { identity, sum } from 'ramda';
 
 export const seventhDay = async (puzzleIndex: string) => {
   const rawInputData = await getInput(7);
@@ -61,5 +61,5 @@ const second = (fileSystem: FileSystem) => {
     ...fileSystem.currentDirectory.getAllChildDirectories().map((directory) => directory.getTotalSize()),
   ];
 
-  console.log(head(allDirectorySizes.filter((size) => unusedSpace + size >= neededSpace).sort((a, b) => a - b)));
+  console.log(allDirectorySizes.sort((a, b) => a - b).find((size) => unusedSpace + size >= neededSpace));
 };
