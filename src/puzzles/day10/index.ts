@@ -72,9 +72,9 @@ const second = (inputData: Command[]) => {
   });
 
   lines.forEach((line, index) => {
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < line.length; i++) {
       const currentRegisterValue = last(
-        commandsWithRegisterValuesAndTotalCycles.filter((c) => c.totalCycles <= i + index * 40 + 1)
+        commandsWithRegisterValuesAndTotalCycles.filter((c) => c.totalCycles <= i + index * line.length + 1)
       )?.registerValue!;
       if (i >= currentRegisterValue - 1 && i <= currentRegisterValue + 1) {
         line[i] = '#';
