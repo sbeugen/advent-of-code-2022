@@ -7,8 +7,8 @@ export const thirteenthDay = async (puzzleIndex: string) => {
   const preparedData: any[] = rawInputData.split('\n\n').map((pair) => {
     const [left, right] = pair.split('\n');
     return {
-      left: eval(left),
-      right: eval(right),
+      left: JSON.parse(left),
+      right: JSON.parse(right),
     };
   });
 
