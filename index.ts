@@ -20,6 +20,7 @@ import { eleventhDay } from './src/puzzles/day11';
 import { twelfthDay } from './src/puzzles/day12';
 import { thirteenthDay } from './src/puzzles/day13';
 import { fourteenthDay } from './src/puzzles/day14';
+import { fifteenthDay } from './src/puzzles/day15';
 
 dotenv.config();
 
@@ -67,6 +68,9 @@ switch (dayArg) {
     break;
   case '14':
     await fourteenthDay(puzzleArg);
+    break;
+  case '15':
+    await fifteenthDay(puzzleArg);
     break;
   default:
     console.error('Provide valid day argument like yarn start 1');
