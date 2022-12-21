@@ -5,31 +5,12 @@ type Monkeys = Record<string, number | string>;
 
 export const twentyFirst = async (puzzleIndex: string) => {
   const rawInputData = await getInput(21);
-  const testData =
-    'root: pppw + sjmn\n' +
-    'dbpl: 5\n' +
-    'cczh: sllz + lgvd\n' +
-    'zczc: 2\n' +
-    'ptdq: humn - dvpt\n' +
-    'dvpt: 3\n' +
-    'lfqf: 4\n' +
-    'humn: 5\n' +
-    'ljgn: 2\n' +
-    'sjmn: drzm * dbpl\n' +
-    'sllz: 4\n' +
-    'pppw: cczh / lfqf\n' +
-    'lgvd: ljgn * ptdq\n' +
-    'drzm: hmdt - zczc\n' +
-    'hmdt: 32';
-
-  const data = rawInputData;
-  // const data = testData;
 
   const preparedData: Monkeys = Object.fromEntries(
-    data
+    rawInputData
       .split('\n')
       .filter(identity)
-      .map((line, index) => {
+      .map((line) => {
         const [name, job] = line.split(':');
         const jobWithoutBlanks = job.replace(/ /g, '');
 
@@ -61,7 +42,7 @@ export const twentyFirst = async (puzzleIndex: string) => {
   }
 };
 
-const first = (inputData: Monkeys) => {
+const resolve = (inputData: Monkeys): string => {
   let result = inputData['root'] as string;
   let matches: string[] | null = [''];
 
@@ -72,9 +53,34 @@ const first = (inputData: Monkeys) => {
     });
   }
 
-  console.log(eval(result));
+  return result;
+};
+const first = (inputData: Monkeys) => {
+  console.log(eval(resolve(inputData)));
 };
 
 const second = (inputData: Monkeys) => {
-  console.log('second');
+  inputData['humn'] = 'eugen';
+  const [rootOperation] = (inputData['root'] as string).match(/[*+-/]/)!;
+  inputData['root'] = (inputData['root'] as string).replace(rootOperation, '===');
+
+  const result = resolve(inputData);
+
+  // found by manually bisecting the result and reducing the +/- to/from myNumber
+  let myNumber = 3378273371000;
+
+  while (true) {
+    const [left, right] = result.split('===');
+    const leftResult = eval(left.replace(/eugen/g, myNumber.toString()) + ')');
+    const rightResult = eval('(' + right);
+
+    if (leftResult === rightResult) {
+      console.log('result:', myNumber);
+      break;
+    } else if (leftResult > rightResult) {
+      myNumber = myNumber + 1;
+    } else {
+      myNumber = myNumber - 1;
+    }
+  }
 };
