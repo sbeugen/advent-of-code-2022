@@ -1,7 +1,7 @@
 import { getInput } from '../../get-input';
 import { identity } from 'ramda';
 
-type Monkey = Record<string, number | string>;
+type Monkeys = Record<string, number | string>;
 
 export const twentyFirst = async (puzzleIndex: string) => {
   const rawInputData = await getInput(21);
@@ -25,7 +25,7 @@ export const twentyFirst = async (puzzleIndex: string) => {
   const data = rawInputData;
   // const data = testData;
 
-  const preparedData: Monkey = Object.fromEntries(
+  const preparedData: Monkeys = Object.fromEntries(
     data
       .split('\n')
       .filter(identity)
@@ -61,7 +61,7 @@ export const twentyFirst = async (puzzleIndex: string) => {
   }
 };
 
-const first = (inputData: Monkey) => {
+const first = (inputData: Monkeys) => {
   let result = inputData['root'] as string;
   let matches: string[] | null = [''];
 
@@ -75,6 +75,6 @@ const first = (inputData: Monkey) => {
   console.log(eval(result));
 };
 
-const second = (inputData: Monkey) => {
+const second = (inputData: Monkeys) => {
   console.log('second');
 };
